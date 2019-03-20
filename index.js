@@ -7,6 +7,7 @@ const http=require('http');
 const server=http.createServer(app);
 const socketio=require('socket.io');
 const io=socketio(server);
+var spawn = require("child_process").spawn;
 app.use(express.urlencoded({extended:true}));
 app.use(express.json());
 app.use(express.static(__dirname+'/public'));
@@ -34,6 +35,8 @@ const job = await collection.insertOne({
   createdBy : req.body.username,
   onDate: new Date()
 });
+console.log(job.insertedId);
+spawn("python3", ["detect_drowsiness.py",String(job.insertedId)]);
 })();
 })
 
