@@ -36,7 +36,7 @@ const job = await collection.insertOne({
   onDate: new Date()
 });
 console.log(job.insertedId);
-spawn("python3", ["detect_drowsiness.py",String(job.insertedId)]);
+spawn("python3", ["grammar.py",String(job.insertedId)]);
 })();
 })
 
